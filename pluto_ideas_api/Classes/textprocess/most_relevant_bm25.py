@@ -86,7 +86,7 @@ def get_relevance_list(user_text, groups):
             document = get_token_list(idea['text'], stop_words)
 
             server_texts.append(
-                {'group_id': group['group_id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
+                {'group_id': group['id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
 
     AVGDL = compute_avgdl([text['idea_text'] for text in server_texts])
     IDF = compute_idf(request, [text['idea_text'] for text in server_texts])

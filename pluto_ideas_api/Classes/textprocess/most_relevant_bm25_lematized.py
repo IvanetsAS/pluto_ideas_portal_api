@@ -61,7 +61,7 @@ def compute_relevance(check_object):
     for word in check_object['user_text']:
         relevance += IDF[word] * (freq_dict[word] * 3) / (
                 freq_dict[word] + 2 * (0.25 + 0.75 * len(check_object['idea_text']) / AVGDL))
-    return check_object['group_id'], check_object['idea_id'], relevance, check_object['idea_text']
+    return check_object['group_id'], check_object['idea_id'], relevance
 
 
 def preprocess_sentence(sentence, stop_words, predictor):
@@ -96,7 +96,7 @@ def get_relevance_list(user_text, groups, predictor):
                     document += lemms
 
             server_texts.append(
-                {'group_id': group['group_id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
+                {'group_id': group['id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
 
     AVGDL = compute_avgdl([text['idea_text'] for text in server_texts])
     IDF = compute_idf(request, [text['idea_text'] for text in server_texts])
@@ -104,9 +104,8 @@ def get_relevance_list(user_text, groups, predictor):
     result = []
     for srt in server_texts:
         result.append(compute_relevance(srt))
-    result.sort(key=lambda x: x[2], reverse=True)
 
-    return result[0:5]
+    return result
 
 
 # get_relevance_list("Музыка должна быть лучше!", "../../data/data.json", RNNMorphPredictor(language='ru'))
