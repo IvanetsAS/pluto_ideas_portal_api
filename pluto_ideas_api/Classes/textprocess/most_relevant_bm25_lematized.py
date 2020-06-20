@@ -1,11 +1,9 @@
 import json
 import math
 import re
-from multiprocessing.pool import Pool
 
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
-from rnnmorph.predictor import RNNMorphPredictor
 
 AVGDL = 0
 IDF = {}
@@ -73,15 +71,12 @@ def preprocess_sentence(sentence, stop_words, predictor):
         if token and token not in stop_words:
             words.append(token)
 
-    return [word.normal_form for word in predictor.predict(words)]
+    return [predictor.parse(word)[0].normal_form for word in words]
 
 
-def get_relevance_list(user_text, ideas_path, predictor):
+def get_relevance_list(user_text, groups, predictor):
     global AVGDL
     global IDF
-
-    with open(ideas_path, encoding='UTF-8') as file:
-        groups = json.load(file)
 
     stop_words = set(stopwords.words('russian'))
 
@@ -113,14 +108,7 @@ def get_relevance_list(user_text, ideas_path, predictor):
     for res in result[0:5]:
         print(res)
 
-    # with Pool() as pool:
-    #     result = pool.map(compute_relevance, server_texts)
-    #     result.sort(key=lambda x: x[1])
-    #
-    #     for res in result[:5]:
-    #         print(res)
-
-    return result
+    return str(result[0:5])
 
 
-get_relevance_list("Музыка должна быть лучше!", "../../data/data.json", RNNMorphPredictor(language='ru'))
+# get_relevance_list("Музыка должна быть лучше!", "../../data/data.json", RNNMorphPredictor(language='ru'))
