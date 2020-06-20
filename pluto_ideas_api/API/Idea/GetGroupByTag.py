@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+import json
 
 import flask
 from flask import current_app as app, request
 
 from pluto_ideas_api.Classes.BaseResponse import BaseResponse
-from pluto_ideas_api.Classes.textprocess.most_relevant_bm25_lematized import get_relevance_list
 
 # Blueprint Configuration
 idea_getgroupbytag_bp = flask.Blueprint(
@@ -15,10 +15,11 @@ idea_getgroupbytag_bp = flask.Blueprint(
 
 
 @idea_getgroupbytag_bp.route('/idea/get_group_by_tag', methods=['POST'])
-def get_relevant_ideas():
+def get_group_by_tag():
     """/idea/get_group_by_tag"""
     # tag = request.args.get('tag').lower().replace("\'", "").replace('\"', "")
-    tag = request.form.get('tag').lower().replace("\'", "").replace('\"', "")
+    tag_json = request.json
+    tag = tag_json["tag"].lower()
 
     for idea_group in app.ideas:
         for idea in idea_group['ideas']:

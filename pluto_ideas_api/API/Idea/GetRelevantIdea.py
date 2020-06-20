@@ -18,18 +18,18 @@ idea_getrelevantideas_bp = flask.Blueprint(
 @idea_getrelevantideas_bp.route('/idea/get_relevant_ideas', methods=['POST'])
 def get_relevant_ideas():
     """/idea/get_relevant_ideas"""
-    responce = request.form.get('text')
-    # responce = "Музыка должна быть лучше!"
+    response = request.json
+    text = response["text"]
 
-    result = get_relevance_list(responce, app.ideas, app.predictor)
+    result = get_relevance_list(text, app.ideas, app.predictor)
 
     relev_dict = {}
-    for responce in result:
-        if responce[0] in relev_dict:
-            if responce[2] > relev_dict[responce[0]][1]:
-                relev_dict[responce[0]] = (responce[0], responce[1], responce[2])
+    for response in result:
+        if response[0] in relev_dict:
+            if response[2] > relev_dict[response[0]][1]:
+                relev_dict[response[0]] = (response[0], response[1], response[2])
         else:
-            relev_dict[responce[0]] = (responce[0], responce[1], responce[2])
+            relev_dict[response[0]] = (response[0], response[1], response[2])
 
     group_list = list(relev_dict.values())
     group_list.sort(key=lambda x: x[2], reverse=True)
