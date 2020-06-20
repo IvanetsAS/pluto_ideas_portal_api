@@ -64,3 +64,12 @@ return
       "users": [{"name": "Александр", "id": 1, "rating": 3}]
     }
 ```
+
+### /user/get_ideas_rating
+return
+```json
+    {
+      "result": true, 
+      "groups": [{"name": "Группа 1", "id": 1, "rating": 232}]
+    }
+```
