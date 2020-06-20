@@ -5,14 +5,14 @@ import flask
 from flask import current_app as app, request
 
 # Blueprint Configuration
-idea_getideasrating_bp = flask.Blueprint(
+idea_gettopgroups_bp = flask.Blueprint(
     'getideasrating_bp', __name__,
     template_folder='templates',
     static_folder='static'
 )
 
 
-@idea_getideasrating_bp.route('/idea/get_ideas_rating', methods=['GET'])
+@idea_gettopgroups_bp.route('/idea/get_top_groups', methods=['GET'])
 def get_ideas_rating():
     """/idea/get_ideas_rating"""
     data = app.ideas

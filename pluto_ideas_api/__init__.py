@@ -21,7 +21,7 @@ def create_app():
         from pluto_ideas_api.API.User import GetUsersRating
         from pluto_ideas_api.API.Idea import GetRelevantIdea
         from pluto_ideas_api.API.Idea import GetGroupByTag
-        from pluto_ideas_api.API.Idea import GetIdeasRating
+        from pluto_ideas_api.API.Idea import GetTopGroups
         from pluto_ideas_api.API.Tags import GetTagsRating
         # Register Data
         with open(os.path.join('data', 'users.json'), encoding='UTF-8') as file:
@@ -35,7 +35,7 @@ def create_app():
         app.register_blueprint(GetUser.user_getuser_bp)
         app.register_blueprint(GetUsersRating.tag_getusersrating_bp)
         app.register_blueprint(GetRelevantIdea.idea_getrelevantideas_bp)
-        app.register_blueprint(GetIdeasRating.idea_getideasrating_bp)
+        app.register_blueprint(GetTopGroups.idea_gettopgroups_bp)
         app.register_blueprint(GetGroupByTag.idea_getgroupbytag_bp)
         app.register_blueprint(GetTagsRating.tag_gettagsrating_bp)
         return app
