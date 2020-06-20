@@ -34,7 +34,7 @@ def create_app():
             ["Ачивка 1", "Ачивка 2", ],
             []
         )
-        with open('data\\data.json', encoding='UTF-8') as file:
+        with open('/home/ivanetc/PycharmProjects/pluto_ideas_api/pluto_ideas_api/data/data.json', encoding='UTF-8') as file:
             current_app.ideas = json.load(file)
         current_app.predictor = MorphAnalyzer()
 
