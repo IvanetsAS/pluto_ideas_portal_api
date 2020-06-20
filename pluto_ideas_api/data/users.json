@@ -1,0 +1,110 @@
+[
+  {
+    "user_id": 1,
+    "first_name": "Алекандр",
+    "second_name": "Сергеевич",
+    "last_name": "Иванец",
+    "image": "картинка",
+    "city": "Ярославль",
+    "department": "Управление трехмерного моделирование",
+    "position": ".net разработчик",
+    "office_phone": "89052668317",
+    "email": "ivanetcas@polymetal.ru",
+    "achievements": [
+      "Ачивка 1",
+      "Ачивка 2"
+    ]
+  },
+  {
+    "user_id": 2,
+    "first_name": "Даниил",
+    "second_name": "Юрьевич",
+    "last_name": "Кириллов",
+    "image": "картинка",
+    "city": "Санкт-Петербург",
+    "department": "data team",
+    "position": "python junior developer",
+    "office_phone": "",
+    "email": "",
+    "achievements": [
+      "Ачивка 1",
+      "Ачивка 2",
+      "Ачивка 3",
+      "Ачивка 4"
+    ]
+  },
+  {
+    "user_id": 3,
+    "first_name": "Степан",
+    "second_name": "",
+    "last_name": "",
+    "image": "картинка",
+    "city": "Калининград",
+    "department": "frontend",
+    "position": "react",
+    "office_phone": "",
+    "email": "",
+    "achievements": [
+      "Ачивка 1"
+    ]
+  },
+  {
+    "user_id": 4,
+    "first_name": "Андрей",
+    "second_name": "",
+    "last_name": "",
+    "image": "картинка",
+    "city": "",
+    "department": "UI/UX",
+    "position": "дизайнер",
+    "office_phone": "",
+    "email": "",
+    "achievements": [
+      "Ачивка 1"
+    ]
+  },
+  {
+    "user_id": 5,
+    "first_name": "Даша",
+    "second_name": "",
+    "last_name": "",
+    "image": "картинка",
+    "city": "",
+    "department": "frontend",
+    "position": "react",
+    "office_phone": "",
+    "email": "",
+    "achievements": [
+      "Ачивка 1"
+    ]
+  },
+  {
+    "user_id": 6,
+    "first_name": "Парниша",
+    "second_name": "",
+    "last_name": "",
+    "image": "картинка",
+    "city": "",
+    "department": "",
+    "position": "",
+    "office_phone": "",
+    "email": "",
+    "achievements": [
+      "Ачивка 1"
+    ]
+  },
+  {
+    "user_id": 7,
+    "first_name": "Одиноко",
+    "second_name": "Одинокий",
+    "last_name": "Одиночка",
+    "image": "картинка",
+    "city": "Урюпинск",
+    "department": "Налоги",
+    "position": "Уборщик",
+    "office_phone": "",
+    "email": "",
+    "achievements": [
+    ]
+  }
+]

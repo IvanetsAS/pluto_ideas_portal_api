@@ -13,9 +13,9 @@ tag_gettagsrating_bp = flask.Blueprint(
 )
 
 
-@tag_gettagsrating_bp.route('/tag/get_tag_rating', methods=['GET'])
-def get_group_by_tag():
-    """/tag/get_tag_rating"""
+@tag_gettagsrating_bp.route('/tag/get_tags_rating', methods=['GET'])
+def get_tags_rating():
+    """/tag/get_tags_rating"""
     data = app.ideas
     ideas = []
     for group in data:

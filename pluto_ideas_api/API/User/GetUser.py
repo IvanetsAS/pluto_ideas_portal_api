@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 
 import flask
 from flask import current_app as app, request
@@ -17,7 +18,7 @@ def GetUser():
     """/user/get_user"""
     id = request.args.get('id')
     print(id)
-    return BaseResponse(True, app.current_user).serialize()
+    return json.dumps({'result': True, 'data': app.current_user})
 
 
 @user_getuser_bp.after_request
