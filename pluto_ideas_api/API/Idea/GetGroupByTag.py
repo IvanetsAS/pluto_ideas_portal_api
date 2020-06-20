@@ -19,11 +19,13 @@ def get_group_by_tag():
     """/idea/get_group_by_tag"""
     # tag = request.args.get('tag').lower().replace("\'", "").replace('\"', "")
     tag_json = request.json
-    tag = tag_json["tag"].lower()
 
-    for idea_group in app.ideas:
-        for idea in idea_group['ideas']:
-            if tag.lower() in idea['tags']:
-                return '{"result": true, "data": ' + str(idea_group).replace("\'", "\"") + '}'
+    if "tag" in tag_json:
+        tag = tag_json["tag"].lower()
 
-    return str(BaseResponse(False, []))
+        for idea_group in app.ideas:
+            for idea in idea_group['ideas']:
+                if tag.lower() in idea['tags']:
+                    return '{"result": true, "data": ' + str(idea_group).replace("\'", "\"") + '}'
+
+    return '{"result": false, "data": []}'
