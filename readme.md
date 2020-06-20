@@ -44,3 +44,21 @@ return
           }
     }
 ```
+
+### /tag/get_tag_rating
+return
+```json
+    {
+      "result": true, 
+      "tags": [{"name": "общение", "rating": 4}]
+    }
+```
+
+### /user/get_users_rating
+return
+```json
+    {
+      "result": true, 
+      "users": [{"name": "Александр", "id": 1, "rating": 3}
+    }
+```
