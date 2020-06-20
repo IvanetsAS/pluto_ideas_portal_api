@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 
-from flask import Flask, current_app
 from pymorphy2 import MorphAnalyzer
 from flask import Flask, current_app, request
 
@@ -19,6 +18,7 @@ def create_app():
         # Import parts of our application
         from pluto_ideas_api.API.User import GetUser
         from pluto_ideas_api.API.Idea import GetRelevantIdea
+        from pluto_ideas_api.API.Idea import GetGroupByTag
         # Register Data
         current_app.current_user = User(
             1,
@@ -41,6 +41,7 @@ def create_app():
         # Register Blueprints
         app.register_blueprint(GetUser.user_getuser_bp)
         app.register_blueprint(GetRelevantIdea.idea_getrelevantideas_bp)
+        app.register_blueprint(GetGroupByTag.idea_getgroupbytag_bp)
         return app
 
 
