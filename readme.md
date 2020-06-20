@@ -91,8 +91,9 @@ return
       }
     ]
 } 
+```
 
-### idea/add_idea_to_group
+### /idea/add_idea_to_group
 ```json
 {
   "group_id": 1,
@@ -101,8 +102,9 @@ return
   "author_id": 2,
   "tags": ["еда"]
 }
+```
 
-### idea/add_new_group
+### /idea/add_new_group
 ```json
 {
   "group_name": "Мы все хотим пожрать",
@@ -111,3 +113,4 @@ return
   "author_id": 2,
   "tags": ["еда"]
 } 
+```
