@@ -4,6 +4,7 @@ import re
 
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
+from pymorphy2 import MorphAnalyzer
 
 AVGDL = 0
 IDF = {}
@@ -74,6 +75,15 @@ def preprocess_sentence(sentence, stop_words, predictor):
     return [predictor.parse(word)[0].normal_form for word in words]
 
 
+def get_tags(text, predictor):
+    tags = []
+    for word in word_tokenize(text):
+        token = predictor.parse(lose_non_russian_alphabet(word).lower())[0]
+        if str(token.tag).split(',')[0] == 'NOUN':
+            tags.append(token.normal_form)
+    return tags
+
+
 def get_relevance_list(user_text, groups, predictor):
     global AVGDL
     global IDF
@@ -85,6 +95,8 @@ def get_relevance_list(user_text, groups, predictor):
         lemms = preprocess_sentence(sentence, stop_words, predictor)
         if lemms:
             request += lemms
+
+    tags = get_tags(user_text, predictor)
 
     server_texts = []
     for group in groups:
@@ -105,7 +117,9 @@ def get_relevance_list(user_text, groups, predictor):
     for srt in server_texts:
         result.append(compute_relevance(srt))
 
-    return result
+    return result, tags
 
 
-# get_relevance_list("Музыка должна быть лучше!", "../../data/data.json", RNNMorphPredictor(language='ru'))
+# with open("../../data/data.json", encoding='UTF-8') as file:
+#     ideas = json.load(file)
+# get_relevance_list("Музыка должна быть лучше!", ideas, MorphAnalyzer())

@@ -91,3 +91,53 @@ return
       }
     ]
 } 
+```
+
+### /idea/add_idea_to_group
+send
+```json
+{
+  "group_id": 1,
+  "name": "Название идеи",
+  "text": "Я хочу пожрать",
+  "author_id": 2,
+  "tags": ["еда"]
+}
+```
+
+### /idea/add_new_group
+send
+```json
+{
+  "group_name": "Мы все хотим пожрать",
+  "name": "Название идеи",
+  "text": "Я хочу пожрать",
+  "author_id": 2,
+  "tags": ["еда"]
+} 
+```
+### /user/get_relevant_ideas
+return
+```json
+    {
+      "result": true, 
+      "groups": [
+        {
+          "name": "Группа 1",
+          "id": 1,
+          "rel_text": "Текст наиболее релевантной идеи из этой группы",
+          "ideas": [
+            {
+              "name": "Название идеи",
+              "id": 1,
+              "author_id": 7,
+              "text": "Текст идеи",
+              "tags": ["музыка"],
+              "rating": 22
+            }
+          ]
+        }
+      ],
+      "tags": ["текст", "идея"]
+    }
+```
