@@ -23,20 +23,9 @@ def create_app():
         from pluto_ideas_api.API.Idea import GetGroupByTag
         from pluto_ideas_api.API.Tags import GetTagsRating
         # Register Data
-        current_app.current_user = User(
-            1,
-            "Алекандр",
-            "Сергеевич",
-            "Иванец",
-            "картинка",
-            "Ярославль",
-            "Управление трехмерного моделирование",
-            ".net разработчик",
-            "89052668317",
-            "ivanetcas@polymetal.ru",
-            ["Ачивка 1", "Ачивка 2", ],
-            []
-        )
+        with open(os.path.join('data', 'users.json'), encoding='UTF-8') as file:
+            current_app.users = json.load(file)
+        current_app.current_user = current_app.users[0]
         with open(os.path.join('data', 'data.json'), encoding='UTF-8') as file:
             current_app.ideas = json.load(file)
         current_app.predictor = MorphAnalyzer()
