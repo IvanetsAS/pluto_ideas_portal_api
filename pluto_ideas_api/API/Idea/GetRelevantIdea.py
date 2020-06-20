@@ -23,7 +23,7 @@ def get_relevant_ideas():
     if "text" in text_json:
         text = text_json["text"]
 
-        result = get_relevance_list(text, app.ideas, app.predictor)
+        result, tags = get_relevance_list(text, app.ideas, app.predictor)
 
         relev_dict = {}
         for response in result:
@@ -50,7 +50,7 @@ def get_relevant_ideas():
             group['rel_text'] = rel_text
 
             groups.append(group)
-        return json.dumps({'result': 'true', 'groups': groups})
+        return json.dumps({'result': 'true', 'groups': groups, 'tags': tags})
     return '{"result": false, "data": []}'
 
 
