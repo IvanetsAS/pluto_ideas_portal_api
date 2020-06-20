@@ -23,7 +23,8 @@ return
     }
 ```
 
-### /idea/get_group_by_tag?tag='общение'
+### /idea/get_group_by_tag
+в body {tag: "tagName}"
 return
 ```json
     {
@@ -64,3 +65,20 @@ return
       "users": [{"name": "Александр", "id": 1, "rating": 3}]
     }
 ```
+
+### idea/get_top_ideas
+```json
+{
+  "result": true, 
+  "data": 
+    [
+      {
+        "name": "Больше зеркал у ксерокса", 
+        "id": 2, 
+        "author_id": 2, 
+        "text": "Мне кажется у ксерокса не хватает зеркал. Нужно их установить, они позволят смотреть на себя пока идет печать и позволят оценивать обстановку со всех сторон)", 
+        "tags": [], 
+        "rating": 100500
+      }
+    ]
+} 

@@ -19,7 +19,7 @@ def get_group_by_tag():
     """/idea/get_group_by_tag"""
     # tag = request.args.get('tag').lower().replace("\'", "").replace('\"', "")
 
-    min_idea_rating = 10000
+    min_idea_rating = 999999
     top_ideas = {}
     for idea_group in app.ideas:
         for idea in idea_group['ideas']:
@@ -37,6 +37,6 @@ def get_group_by_tag():
                     min_idea_rating = min(top_ideas.keys())
 
     ideas = list(top_ideas.values())
+    ideas.sort(key=lambda n: n["rating"], reverse=True)
 
-
-    return '{"result": true, "data": ' + str(ideas) + '}'
+    return '{"result": true, "data": ' + str(ideas).replace("\'", "\"") + '}'
