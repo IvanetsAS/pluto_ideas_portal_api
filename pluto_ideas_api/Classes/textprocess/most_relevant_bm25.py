@@ -1,7 +1,6 @@
 import json
 import math
 import re
-from multiprocessing.pool import Pool
 
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -61,32 +60,30 @@ def compute_relevance(check_object):
     relevance = 0
     for word in check_object['user_text']:
         relevance += IDF[word] * (freq_dict[word] * 3) / (
-                    freq_dict[word] + 2 * (0.25 + 0.75 * len(check_object['idea_text']) / AVGDL))
+                freq_dict[word] + 2 * (0.25 + 0.75 * len(check_object['idea_text']) / AVGDL))
     return check_object['group_id'], check_object['idea_id'], relevance, check_object['idea_text']
 
 
-def get_relevance_list(user_text, ideas_path):
+def get_token_list(text, stop_words):
+    document = []
+    for token in word_tokenize(text):
+        token = lose_non_russian_alphabet(token).lower()
+        if token and token not in stop_words:
+            document.append(token)
+    return document
+
+
+def get_relevance_list(user_text, groups):
     global AVGDL
     global IDF
 
-    with open(ideas_path, encoding='UTF-8') as file:
-        groups = json.load(file)
-
     stop_words = set(stopwords.words('russian'))
-    request = []
-    for token in word_tokenize(user_text):
-        token = lose_non_russian_alphabet(token).lower()
-        if token and token not in stop_words:
-            request.append(token)
+    request = get_token_list(user_text, stop_words)
 
     server_texts = []
     for group in groups:
         for idea in group['ideas']:
-            document = []
-            for token in word_tokenize(idea['text']):
-                token = lose_non_russian_alphabet(token).lower()
-                if token and token not in stop_words:
-                    document.append(token)
+            document = get_token_list(idea['text'], stop_words)
 
             server_texts.append(
                 {'group_id': group['group_id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
@@ -98,17 +95,8 @@ def get_relevance_list(user_text, ideas_path):
     for srt in server_texts:
         result.append(compute_relevance(srt))
     result.sort(key=lambda x: x[2], reverse=True)
-    for res in result[0:5]:
-        print(res)
 
-    # with Pool() as pool:
-    #     result = pool.map(compute_relevance, server_texts)
-    #     result.sort(key=lambda x: x[1])
-    #
-    #     for res in result[:5]:
-    #         print(res)
-
-    return result
+    return result[0:5]
 
 
-get_relevance_list("Мне не хватает общения, поговорите со мной!", "../../data/data.json")
+# get_relevance_list("Музыка должна быть лучше!", "../../data/data.json")
