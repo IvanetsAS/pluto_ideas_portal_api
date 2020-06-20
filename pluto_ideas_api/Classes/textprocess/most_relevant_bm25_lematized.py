@@ -111,7 +111,7 @@ def get_relevance_list(user_text, groups, predictor):
                 {'group_id': group['id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
 
     AVGDL = compute_avgdl([text['idea_text'] for text in server_texts])
-    IDF = compute_idf(request, [text['idea_text'] for text in server_texts])
+    IDF = compute_idf(set(request), [text['idea_text'] for text in server_texts])
 
     result = []
     for srt in server_texts:
