@@ -19,7 +19,7 @@ def get_ideas_rating():
     groups_dict = {}
     for group in data:
         rating = 0
-        for idea in group:
+        for idea in group['ideas']:
             rating += idea['rating']
         rating = rating / len(group['ideas'])
         groups_dict[(group['id'], group['name'])] = rating

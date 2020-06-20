@@ -42,5 +42,4 @@ def add_new_group():
         ],
 
     })
-
     return '{"result": true}'
