@@ -1,7 +1,6 @@
 import json
 import math
 import re
-import sys
 from multiprocessing.pool import Pool
 
 from nltk.tokenize import word_tokenize
