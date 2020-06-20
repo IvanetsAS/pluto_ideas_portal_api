@@ -94,6 +94,7 @@ return
 ```
 
 ### /idea/add_idea_to_group
+send
 ```json
 {
   "group_id": 1,
@@ -105,6 +106,7 @@ return
 ```
 
 ### /idea/add_new_group
+send
 ```json
 {
   "group_name": "Мы все хотим пожрать",
