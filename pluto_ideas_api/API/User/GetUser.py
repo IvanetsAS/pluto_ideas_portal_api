@@ -18,12 +18,16 @@ def GetUser():
     """/user/get_user"""
     # id = request.args.get('id')
     # print(id)
-    user_achievements = []
     current_user = app.current_user
-    for achievement in current_user["achievements"]:
-        if achievement in app.achievements:
-            print("hello")
-    return json.dumps({'result': True, 'data': app.current_user})
+    user_achievements = [achievement for achievement in app.achievements if achievement["id"] in current_user["achievements"]]
+
+    current_user.pop("achievements")
+    current_user.update({"achievements":user_achievements})
+
+
+
+    return '{"result": true, "data": ' + str(current_user).replace("\'", "\"") + '}'
+    # return json.dumps({'result': True, 'data': app.current_user})
 
 
 @user_getuser_bp.after_request
