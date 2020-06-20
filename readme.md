@@ -116,3 +116,28 @@ send
   "tags": ["еда"]
 } 
 ```
+### /user/get_relevant_ideas
+return
+```json
+    {
+      "result": true, 
+      "groups": [
+        {
+          "name": "Группа 1",
+          "id": 1,
+          "rel_text": "Текст наиболее релевантной идеи из этой группы"
+          "ideas": [
+            {
+              "name": "Название идеи",
+              "id": 1,
+              "author_id": 7,
+              "text": "Текст идеи",
+              "tags": ["музыка"],
+              "rating": 22
+            }
+          ]
+        }
+      ]
+      "tags": ["текст", "идея"]
+    }
+```
