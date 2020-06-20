@@ -16,8 +16,13 @@ user_getuser_bp = flask.Blueprint(
 @user_getuser_bp.route('/user/get_user', methods=['GET'])
 def GetUser():
     """/user/get_user"""
-    id = request.args.get('id')
-    print(id)
+    # id = request.args.get('id')
+    # print(id)
+    user_achievements = []
+    current_user = app.current_user
+    for achievement in current_user["achievements"]:
+        if achievement in app.achievements:
+            print("hello")
     return json.dumps({'result': True, 'data': app.current_user})
 
 
