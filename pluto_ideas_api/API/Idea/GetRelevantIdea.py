@@ -18,34 +18,37 @@ idea_getrelevantideas_bp = flask.Blueprint(
 @idea_getrelevantideas_bp.route('/idea/get_relevant_ideas', methods=['POST'])
 def get_relevant_ideas():
     """/idea/get_relevant_ideas"""
-    response = request.json
-    text = response["text"]
+    text_json = request.json
 
-    result = get_relevance_list(text, app.ideas, app.predictor)
+    if "text" in text_json:
+        text = text_json["text"]
 
-    relev_dict = {}
-    for response in result:
-        if response[0] in relev_dict:
-            if response[2] > relev_dict[response[0]][1]:
+        result = get_relevance_list(text, app.ideas, app.predictor)
+
+        relev_dict = {}
+        for response in result:
+            if response[0] in relev_dict:
+                if response[2] > relev_dict[response[0]][1]:
+                    relev_dict[response[0]] = (response[0], response[1], response[2])
+            else:
                 relev_dict[response[0]] = (response[0], response[1], response[2])
-        else:
-            relev_dict[response[0]] = (response[0], response[1], response[2])
 
-    group_list = list(relev_dict.values())
-    group_list.sort(key=lambda x: x[2], reverse=True)
+        group_list = list(relev_dict.values())
+        group_list.sort(key=lambda x: x[2], reverse=True)
 
-    groups = []
-    for t in group_list[:5]:
-        group = {}
-        for idea in app.ideas:
-            if idea['id'] == t[0]:
-                group = idea
+        groups = []
+        for t in group_list[:5]:
+            group = {}
+            for idea in app.ideas:
+                if idea['id'] == t[0]:
+                    group = idea
 
-        rel_text = ""
-        for idea in group['ideas']:
-            if idea['id'] == t[1]:
-                rel_text = idea['text']
-        group['rel_text'] = rel_text
+            rel_text = ""
+            for idea in group['ideas']:
+                if idea['id'] == t[1]:
+                    rel_text = idea['text']
+            group['rel_text'] = rel_text
 
-        groups.append(group)
-    return json.dumps({'result': True, 'groups': groups})
+            groups.append(group)
+        return json.dumps({'result': 'true', 'groups': groups})
+    return '{"result": false, "data": []}'
