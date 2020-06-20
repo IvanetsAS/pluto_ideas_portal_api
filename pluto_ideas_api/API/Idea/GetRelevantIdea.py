@@ -14,13 +14,12 @@ idea_getrelevantideas_bp = flask.Blueprint(
 )
 
 
-@idea_getrelevantideas_bp.route('/idea/get_relevant_ideas', methods=['GET'])
+@idea_getrelevantideas_bp.route('/idea/get_relevant_ideas', methods=['POST'])
 def get_relevant_ideas():
     """/idea/get_relevant_ideas"""
-    # TODO разобраться, как мы получаем текст
-    # text = request.args.get('id')
-    text = "Музыка должна быть лучше!"
+    text = request.form.get('text')
+    # text = "Музыка должна быть лучше!"
 
     result = get_relevance_list(text, app.ideas, app.predictor)
     # TODO решить, в каком виде мы возвращаем результат
-    return result
+    return str(result)

@@ -95,10 +95,8 @@ def get_relevance_list(user_text, groups):
     for srt in server_texts:
         result.append(compute_relevance(srt))
     result.sort(key=lambda x: x[2], reverse=True)
-    for res in result[0:5]:
-        print(res)
 
-    return str(result[0:5])
+    return result[0:5]
 
 
 # get_relevance_list("Музыка должна быть лучше!", "../../data/data.json")
