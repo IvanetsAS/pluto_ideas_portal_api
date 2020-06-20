@@ -48,4 +48,4 @@ def get_relevant_ideas():
         group['rel_text'] = rel_text
 
         groups.append(group)
-    return json.dumps({'result': 'true', 'groups': groups})
+    return json.dumps({'result': True, 'groups': groups})
