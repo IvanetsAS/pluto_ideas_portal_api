@@ -11,8 +11,8 @@ class User:
             position,
             office_phone,
             email,
-            achievements
-
+            achievements,
+            ideas
     ):
         self.user_id = user_id
         self.first_name = first_name
@@ -25,3 +25,4 @@ class User:
         self.office_phone = office_phone
         self.email = email
         self.achievements = achievements
+        self.ideas = []
