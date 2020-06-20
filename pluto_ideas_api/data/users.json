@@ -11,8 +11,9 @@
     "office_phone": "89052668317",
     "email": "ivanetcas@polymetal.ru",
     "achievements": [
-      "Ачивка 1",
-      "Ачивка 2"
+      1,
+      2,
+      3
     ]
   },
   {
@@ -27,10 +28,9 @@
     "office_phone": "",
     "email": "",
     "achievements": [
-      "Ачивка 1",
-      "Ачивка 2",
-      "Ачивка 3",
-      "Ачивка 4"
+      2,
+      3,
+      4
     ]
   },
   {
@@ -45,7 +45,7 @@
     "office_phone": "",
     "email": "",
     "achievements": [
-      "Ачивка 1"
+      1
     ]
   },
   {
@@ -60,7 +60,7 @@
     "office_phone": "",
     "email": "",
     "achievements": [
-      "Ачивка 1"
+      2
     ]
   },
   {
@@ -75,7 +75,7 @@
     "office_phone": "",
     "email": "",
     "achievements": [
-      "Ачивка 1"
+      2
     ]
   },
   {
@@ -90,7 +90,7 @@
     "office_phone": "",
     "email": "",
     "achievements": [
-      "Ачивка 1"
+      3
     ]
   },
   {

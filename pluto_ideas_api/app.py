@@ -32,11 +32,13 @@ def create_app():
             ".net разработчик",
             "89052668317",
             "ivanetcas@polymetal.ru",
-            ["Ачивка 1", "Ачивка 2", ],
+            [1, 2, ],
             []
         )
         with open('/home/ivanetc/PycharmProjects/pluto_ideas_api/pluto_ideas_api/data/data.json', encoding='UTF-8') as file:
             current_app.ideas = json.load(file)
+        with open('/home/ivanetc/PycharmProjects/pluto_ideas_api/pluto_ideas_api/data/achievements.json', encoding='UTF-8') as file:
+            current_app.achievements = json.load(file)
         current_app.predictor = MorphAnalyzer()
 
         # Register Blueprints
