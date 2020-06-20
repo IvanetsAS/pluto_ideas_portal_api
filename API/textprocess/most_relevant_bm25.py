@@ -34,19 +34,13 @@ def compute_frequency_dictionary(request, document):
 def compute_avgdl(texts):
     corpus_length = 0
     for text in texts:
-        corpus_length += len([lose_non_russian_alphabet(token).lower() for token in word_tokenize(text)
-                              if lose_non_russian_alphabet(token)])
+        corpus_length += len(text)
     return corpus_length / len(texts)
 
 
 def compute_idf(request, texts):
-    request = {lose_non_russian_alphabet(token).lower() for token in word_tokenize(request)
-               if lose_non_russian_alphabet(token)}
-
     count = {}
     for text in texts:
-        text = [lose_non_russian_alphabet(token).lower() for token in word_tokenize(text)
-                if lose_non_russian_alphabet(token)]
         for word in request:
             if word in text:
                 if word in count:
@@ -64,43 +58,42 @@ def compute_idf(request, texts):
 
 
 def compute_relevance(check_object):
-    stop_words = set(stopwords.words('russian'))
-    request = []
-    for token in word_tokenize(check_object['user_text']):
-        token = lose_non_russian_alphabet(token).lower()
-        if token and token not in stop_words:
-            request.append(token)
-
-    document = []
-    for token in word_tokenize(check_object['idea_text']):
-        token = lose_non_russian_alphabet(token).lower()
-        if token and token not in stop_words:
-            document.append(token)
-
-    freq_dict = compute_frequency_dictionary(request, document)
-
+    freq_dict = compute_frequency_dictionary(check_object['user_text'], check_object['idea_text'])
     relevance = 0
-    for word in request:
-        relevance += IDF[word] * (freq_dict[word] * 3) / (freq_dict[word] + 2 * (0.25 + 0.75 * len(document) / AVGDL))
+    for word in check_object['user_text']:
+        relevance += IDF[word] * (freq_dict[word] * 3) / (
+                    freq_dict[word] + 2 * (0.25 + 0.75 * len(check_object['idea_text']) / AVGDL))
     return check_object['group_id'], check_object['idea_id'], relevance, check_object['idea_text']
 
 
 def get_relevance_list(user_text, ideas_path):
-    # user_text = sys.argv[1]
-    # ideas_path = sys.argv[2]
+    global AVGDL
+    global IDF
 
-    user_text = "Мне не хватает общения, поговорите со мной!"
-    ideas_path = "../../data/data.json"
     with open(ideas_path, encoding='UTF-8') as file:
         groups = json.load(file)
 
+    stop_words = set(stopwords.words('russian'))
+    request = []
+    for token in word_tokenize(user_text):
+        token = lose_non_russian_alphabet(token).lower()
+        if token and token not in stop_words:
+            request.append(token)
+
     server_texts = []
     for group in groups:
-        server_texts += [
-            {'group_id': group['group_id'], 'idea_id': idea['id'], 'idea_text': idea['text'], 'user_text': user_text}
-            for idea in group['ideas']]
+        for idea in group['ideas']:
+            document = []
+            for token in word_tokenize(idea['text']):
+                token = lose_non_russian_alphabet(token).lower()
+                if token and token not in stop_words:
+                    document.append(token)
+
+            server_texts.append(
+                {'group_id': group['group_id'], 'idea_id': idea['id'], 'idea_text': document, 'user_text': request})
+
     AVGDL = compute_avgdl([text['idea_text'] for text in server_texts])
-    IDF = compute_idf(user_text, [text['idea_text'] for text in server_texts])
+    IDF = compute_idf(request, [text['idea_text'] for text in server_texts])
 
     result = []
     for srt in server_texts:
@@ -117,3 +110,6 @@ def get_relevance_list(user_text, ideas_path):
     #         print(res)
 
     return result
+
+
+get_relevance_list("Мне не хватает общения, поговорите со мной!", "../../data/data.json")
