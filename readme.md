@@ -91,3 +91,23 @@ return
       }
     ]
 } 
+
+### idea/add_idea_to_group
+```json
+{
+  "group_id": 1,
+  "name": "Название идеи",
+  "text": "Я хочу пожрать",
+  "author_id": 2,
+  "tags": ["еда"]
+}
+
+### idea/add_new_group
+```json
+{
+  "group_name": "Мы все хотим пожрать",
+  "name": "Название идеи",
+  "text": "Я хочу пожрать",
+  "author_id": 2,
+  "tags": ["еда"]
+} 
