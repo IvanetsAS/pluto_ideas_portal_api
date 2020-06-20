@@ -37,5 +37,4 @@ def add_idea_to_group():
                 'tags': tags,
                 'author_id': author_id
             })
-
     return '{"result": true}'
