@@ -45,7 +45,7 @@ def get_relevance_list(user_text, ideas_path, vector_dict):
         for idea in group['ideas']:
             document = get_token_list(idea['text'], stop_words)
             server_texts.append(
-                {'group_id': group['group_id'], 'idea_id': idea['id'], 'idea_text': document})
+                {'group_id': group['id'], 'idea_id': idea['id'], 'idea_text': document})
 
     request_vector = compute_text_vector(request, vector_dict)
 
