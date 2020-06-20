@@ -1,6 +1,9 @@
-from flask import Flask, app, current_app
+# -*- coding: utf-8 -*-
 
-from Classes.User import User
+
+from flask import Flask, current_app
+
+from pluto_ideas_api.Classes.User import User
 
 """Initialize Flask app."""
 
@@ -12,8 +15,7 @@ def create_app():
 
     with app.app_context():
         # Import parts of our application
-        from API.User import GetUser
-
+        from pluto_ideas_api.API.User import GetUser
 
         # Register Data
         current_app.current_user = User(
@@ -27,11 +29,16 @@ def create_app():
             ".net разработчик",
             "89052668317",
             "ivanetcas@polymetal.ru",
-            ["Ачивка 1","Ачивка 2",],
+            ["Ачивка 1", "Ачивка 2", ],
         )
+        current_app.ideas = []
 
         # Register Blueprints
         app.register_blueprint(GetUser.user_getuser_bp)
 
         return app
 
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run()
