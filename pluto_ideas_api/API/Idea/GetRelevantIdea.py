@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 
 import flask
 from flask import current_app as app, request
@@ -47,4 +48,4 @@ def get_relevant_ideas():
         group['rel_text'] = rel_text
 
         groups.append(group)
-    return {'result': 'true', 'groups': groups}
+    return json.dumps({'result': 'true', 'groups': groups})

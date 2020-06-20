@@ -5,6 +5,7 @@ from navec import Navec
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import numpy as np
+from numpy.linalg import norm
 
 
 def lose_non_russian_alphabet(text):
@@ -25,12 +26,16 @@ def compute_text_vector(text, vector_dict):
     for word in text:
         if word in vector_dict:
             vec += np.array(vector_dict[word])
+
+    vec = vec / len(text)
     return vec
 
 
 def compute_text_distance(check_object, vector, vector_dict):
     text_vector = compute_text_vector(check_object['idea_text'], vector_dict)
-    return check_object['group_id'], check_object['idea_id'], np.sum(vector * text_vector), check_object['idea_text']
+
+    cos = np.sum(vector * text_vector) / (norm(vector) * norm(text_vector))
+    return check_object['group_id'], check_object['idea_id'], cos, check_object['idea_text']
 
 
 def get_relevance_list(user_text, ideas_path, vector_dict):
