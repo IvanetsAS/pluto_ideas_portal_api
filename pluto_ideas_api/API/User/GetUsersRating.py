@@ -19,7 +19,7 @@ def get_user_name(user_id, users):
 
 
 @tag_getusersrating_bp.route('/user/get_users_rating', methods=['GET'])
-def get_group_by_tag():
+def get_users_rating():
     """/user/get_users_rating"""
     data = app.ideas
     ideas = []
