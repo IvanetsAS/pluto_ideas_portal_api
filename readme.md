@@ -66,7 +66,7 @@ return
     }
 ```
 
-### /user/get_ideas_rating
+### /user/get_top_groups
 return
 ```json
     {
