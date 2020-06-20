@@ -47,7 +47,7 @@ return
     }
 ```
 
-### /tag/get_tag_rating
+### /tag/get_tags_rating
 return
 ```json
     {
