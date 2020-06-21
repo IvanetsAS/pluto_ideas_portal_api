@@ -21,15 +21,14 @@ def add_new_group():
     text = text_json['text']
     tags = text_json['tags']
     name = text_json['name']
-    group_name = text_json['group_name']
     author_id = text_json['author_id']
     max_id = 0
     for group in app.ideas:
         if group['id'] > max_id:
             max_id = group['id']
-    app.ideas.append({
+    new_group = {
         "id": max_id + 1,
-        "name": group_name,
+        "name": name,
         "ideas": [
             {
                 "name": name,
@@ -41,5 +40,6 @@ def add_new_group():
             }
         ],
 
-    })
-    return '{"result": true}'
+    }
+    app.ideas.append(new_group)
+    return json.dumps({'result': True, 'group': new_group})
