@@ -18,12 +18,21 @@ def GetUser():
     """/user/get_user"""
     # id = request.args.get('id')
     # print(id)
-    current_user = app.current_user
+    current_user = app.current_user.copy()
     user_achievements = [achievement for achievement in app.achievements if achievement["id"] in current_user["achievements"]]
 
     current_user.pop("achievements")
     current_user.update({"achievements":user_achievements})
 
+    current_user_ideas = []
+
+    for idea_group in app.ideas:
+        for idea in idea_group['ideas']:
+            if idea['author_id'] == current_user['user_id']:
+                current_user_ideas.append(idea)
+
+    current_user_ideas.sort(key=lambda n: n["rating"], reverse=True)
+    current_user.update({"ideas":current_user_ideas})
 
 
     return '{"result": true, "data": ' + str(current_user).replace("\'", "\"") + '}'
@@ -34,7 +43,7 @@ def GetUser():
 def add_cors_headers(response):
     if request.referrer is not None:
         r = request.referrer[:-1]
-        white = ['http://localhost:3000', 'http://localhost:8080']
+        white = ['http://localhost:3000', 'http://localhost:8080', 'http://45.90.34.42']
 
         if r in white:
             response.headers.add('Access-Control-Allow-Origin', r)

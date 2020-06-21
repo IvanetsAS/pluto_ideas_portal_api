@@ -46,7 +46,7 @@ def get_users_rating():
 def add_cors_headers(response):
     if request.referrer is not None:
         r = request.referrer[:-1]
-        white = ['http://localhost:3000', 'http://localhost:8080']
+        white = ['http://localhost:3000', 'http://localhost:8080', 'http://45.90.34.42']
 
         if r in white:
             response.headers.add('Access-Control-Allow-Origin', r)

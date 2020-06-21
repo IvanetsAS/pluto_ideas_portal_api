@@ -23,7 +23,8 @@ def create_app():
         from pluto_ideas_api.API.Idea import GetTopGroups
         from pluto_ideas_api.API.Idea import GetTopIdeas
         from pluto_ideas_api.API.Tags import GetTagsRating
-
+        from pluto_ideas_api.API.Idea import AddIdeaToGroup
+        from pluto_ideas_api.API.Idea import AddNewGroup
         # Register Data
         current_app.current_user = User(
             1,
@@ -56,7 +57,8 @@ def create_app():
         app.register_blueprint(GetTopIdeas.idea_gettopideas_bp)
         app.register_blueprint(GetTagsRating.tag_gettagsrating_bp)
         app.register_blueprint(GetTopGroups.idea_gettopgroups_bp)
-
+        app.register_blueprint(AddIdeaToGroup.idea_addideatogroup_bp)
+        app.register_blueprint(AddNewGroup.idea_addnewgroup_bp)
         return app
 
 
