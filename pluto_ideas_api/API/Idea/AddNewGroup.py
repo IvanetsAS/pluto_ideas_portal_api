@@ -27,7 +27,7 @@ def add_new_group():
     for group in app.ideas:
         if group['id'] > max_id:
             max_id = group['id']
-    app.ideas.append({
+    new_group = {
         "id": max_id + 1,
         "name": group_name,
         "ideas": [
@@ -41,5 +41,6 @@ def add_new_group():
             }
         ],
 
-    })
-    return '{"result": true}'
+    }
+    app.ideas.append(new_group)
+    return json.dumps({'result': True, 'group': new_group})
